@@ -1,2 +1,10 @@
 :host {
+    display: flex;
+    flex-direction: column;
+
+    mat-form-field {
+        margin-top: 16px;
+        width: 75%;
+        align-self: center;
+    }
 }
