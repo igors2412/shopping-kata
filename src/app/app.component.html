@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<nav>
+    <section><h2>BVV Shopping</h2></section>
+    <section>
+        <button mat-icon-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon class="material-icons-outlined">home</mat-icon>
+        </button>
+        <button mat-icon-button matBadge="99" matBadgeColor="warn" routerLink="cart" routerLinkActive="active">
+            <mat-icon class="material-icons-outlined">shopping_cart</mat-icon>
+        </button>
+    </section>
+</nav>
+<div class="content">
+    <router-outlet></router-outlet>
+</div>
