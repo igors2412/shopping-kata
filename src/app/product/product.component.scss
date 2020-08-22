@@ -19,8 +19,14 @@
         box-shadow: 0px 0px 6px 0px colors.$shadow;
     }
 
-    .sale {
+    .sale,
+    .price,
+    .sale-only,
+    .shop {
         position: absolute;
+    }
+
+    .sale {
         top: 8px;
         right: 8px;
         color: colors.$accent-dark;
@@ -34,8 +40,12 @@
 
     .price,
     .sale-only {
-        position: absolute;
-        bottom: 8px;
+        bottom: 12px;
         right: 8px;
+    }
+
+    .shop {
+        bottom: 8px;
+        left: 8px;
     }
 }
