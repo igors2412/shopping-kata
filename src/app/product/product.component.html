@@ -1,0 +1,9 @@
+<mat-icon class="material-icons-outlined sale" *ngIf="product.hasSale || product.hasSuperSale">new_releases</mat-icon>
+
+<mat-icon class="material-icons-outlined figure">{{ product.icon }}</mat-icon>
+
+<h3>{{ product.name }}</h3>
+
+<article class="price" *ngIf="!product.isSaleOnly">{{ product.cost }} €</article>
+
+<mat-icon class="material-icons-outlined sale-only" color="warn" *ngIf="product.isSaleOnly">report_problem</mat-icon>

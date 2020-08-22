@@ -1,0 +1,52 @@
+{
+    "$schema": "./schema.json",
+    "products": [
+        {
+            "id": "A",
+            "cost": 50,
+            "name": "Puzzle",
+            "icon": "extension",
+            "saleQuantity": 2,
+            "saleCost": 45,
+            "superSaleQuantity": 3,
+            "superSaleCost": 43.33
+        },
+        {
+            "id": "B",
+            "cost": 30,
+            "name": "Wecker",
+            "icon": "alarm",
+            "saleQuantity": 2,
+            "saleCost": 22.5
+        },
+        {
+            "id": "C",
+            "cost": 20,
+            "name": "Notizbuch",
+            "icon": "article"
+        },
+        {
+            "id": "D",
+            "cost": 15,
+            "name": "Gutschein",
+            "icon": "card_giftcard"
+        },
+        {
+            "id": "E",
+            "name": "Tee",
+            "icon": "eco",
+            "saleQuantity": 2,
+            "saleCost": 7.5
+        },
+        {
+            "id": "F",
+            "cost": 10,
+            "name": "Radio",
+            "icon": "radio",
+            "saleQuantity": 2,
+            "saleCost": 10,
+            "superSaleQuantity": 6,
+            "superSaleCost": 5
+        }
+    ]
+}

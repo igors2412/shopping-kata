@@ -7,4 +7,20 @@
         width: 75%;
         align-self: center;
     }
+
+    .loading {
+        margin: 32px 0;
+        align-self: center;
+    }
+
+    .data {
+        margin-top: 32px;
+        display: flex;
+        flex-wrap: wrap;
+
+        app-product {
+            margin-right: 16px;
+            margin-bottom: 16px;
+        }
+    }
 }

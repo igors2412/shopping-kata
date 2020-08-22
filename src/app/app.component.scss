@@ -19,7 +19,7 @@
         box-sizing: border-box;
 
         h2 {
-            color: colors.$accent;
+            color: colors.$accent-dark;
         }
 
         section:last-of-type {
@@ -28,7 +28,7 @@
             justify-content: space-between;
 
             button.active {
-                border-bottom: 2px solid colors.$accent;
+                border-bottom: 2px solid colors.$accent-dark;
                 border-radius: 0;
             }
         }
