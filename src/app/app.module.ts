@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -14,12 +14,20 @@ import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
+import { EmptyLogoComponent } from './empty-logo/empty-logo.component';
 import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
 import { CartService, ProductService } from './services';
 
 @NgModule({
-    declarations: [AppComponent, HomeComponent, CartComponent, ProductComponent, AddToCartComponent],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        CartComponent,
+        ProductComponent,
+        AddToCartComponent,
+        EmptyLogoComponent,
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -32,6 +40,7 @@ import { CartService, ProductService } from './services';
         MatDialogModule,
         MatProgressSpinnerModule,
         ReactiveFormsModule,
+        FormsModule,
         MatTooltipModule,
     ],
     providers: [CartService, ProductService],

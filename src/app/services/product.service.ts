@@ -10,6 +10,6 @@ import { IProduct } from '../../models';
 export class ProductService {
     getProducts(): Observable<IProduct[]> {
         const products = data.products as IProduct[];
-        return of(products).pipe(delay(1500));
+        return of(products).pipe(delay(1000));
     }
 }

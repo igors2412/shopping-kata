@@ -1,1 +1,24 @@
 <h1>Warenkorb</h1>
+
+<div class="items" *ngIf="!isEmpty">
+    <h2 class="total">Summe: {{ totalPrice }} €</h2>
+
+    <aside *ngFor="let item of items" class="cart-item">
+        <mat-icon class="figure">{{ item.product.icon }}</mat-icon>
+        <section class="stats">
+            <h3>{{ item.product.name }}</h3>
+            <div class="quantity">
+                <span>Menge:</span>
+                <mat-form-field>
+                    <input matInput type="number" [(ngModel)]="item.quantity" />
+                </mat-form-field>
+            </div>
+        </section>
+        <h2 class="price">Preis: {{ item.product.calculatePriceByQuantity(item.quantity) }} €</h2>
+    </aside>
+</div>
+
+<div class="empty" *ngIf="isEmpty">
+    <article>Dein Warenkorb ist leer. <a routerLink="">Hier</a> geht es zu den Produkten.</article>
+    <app-empty-logo></app-empty-logo>
+</div>

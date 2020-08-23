@@ -8,14 +8,10 @@ import { ProductService } from '../services';
     styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-    products: ProductViewModel[];
+    products: ProductViewModel[] = [];
     isLoading: boolean = false;
 
     constructor(private readonly productService: ProductService) {}
-
-    get hasNoProducts(): boolean {
-        return this.products !== undefined && this.products.length === 0;
-    }
 
     ngOnInit(): void {
         this.isLoading = true;

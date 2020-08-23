@@ -1,0 +1,61 @@
+@use '../../styles/colors.scss';
+
+:host {
+    .items,
+    .empty,
+    .total {
+        margin-top: 32px;
+    }
+
+    .empty {
+        article {
+            margin-bottom: 32px;
+        }
+    }
+
+    .items {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        .total {
+            position: absolute;
+            top: -32px;
+            right: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 16px;
+            border: 1px solid colors.$shadow;
+            border-radius: 4px;
+            padding: 8px 16px;
+            box-sizing: border-box;
+            width: 50%;
+
+            .figure {
+                font-size: 48px;
+                height: 48px;
+                width: 48px;
+                margin-right: 16px;
+                align-self: center;
+            }
+
+            .quantity {
+                span {
+                    margin-right: 16px;
+                }
+
+                mat-form-field {
+                    width: 48px;
+                }
+            }
+
+            .price {
+                align-self: flex-end;
+                text-align: end;
+                width: 64%;
+            }
+        }
+    }
+}

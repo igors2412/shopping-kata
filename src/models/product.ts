@@ -59,4 +59,30 @@ export class ProductViewModel implements IProduct {
             return this.superSaleQuantity;
         }
     }
+
+    calculatePriceByQuantity(quantity: number): number {
+        if (quantity === 0) {
+            return 0;
+        }
+
+        if (this.hasSuperSale && quantity >= this.superSaleQuantity) {
+            return this.calculatePriceFragmentByQuantity(quantity, this.superSaleCost, this.superSaleQuantity);
+        } else if (this.hasSale && quantity >= this.saleQuantity) {
+            return this.calculatePriceFragmentByQuantity(quantity, this.saleCost, this.saleQuantity);
+        } else if (!this.isSaleOnly) {
+            return quantity * this.cost;
+        } else {
+            throw new Error(`Faulty data model for product with id: ${this.id}`);
+        }
+    }
+
+    private calculatePriceFragmentByQuantity(quantity: number, saleCost: number, saleQuantity: number): number {
+        const remainder = quantity % saleQuantity;
+
+        if (remainder === 0) {
+            return quantity * saleCost;
+        } else {
+            return this.calculatePriceByQuantity(remainder) + this.calculatePriceByQuantity(quantity - remainder);
+        }
+    }
 }

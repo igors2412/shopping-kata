@@ -29,13 +29,13 @@ export class AppComponent implements OnInit, OnDestroy {
         this.removeSub.unsubscribe();
     }
 
-    private gotItem(item: ICartItem): void {
+    private gotItem(item: ICartItem | undefined): void {
         if (!this.cartItems.some((ci) => ci.product.id === item.product.id)) {
             this.cartItems.push(item);
         }
     }
 
-    private itemRemoved(item: ICartItem): void {
+    private itemRemoved(item: ICartItem | undefined): void {
         const oldItem = this.cartItems.find((ci) => ci.product.id === item.product.id);
         if (oldItem === undefined) {
             return;
