@@ -1,4 +1,9 @@
-<mat-icon class="material-icons-outlined sale" *ngIf="product.hasSale || product.hasSuperSale">new_releases</mat-icon>
+<mat-icon
+    matTooltip="Mengenrabatt verfügbar"
+    class="material-icons-outlined sale"
+    *ngIf="product.hasSale || product.hasSuperSale"
+    >new_releases</mat-icon
+>
 
 <mat-icon class="material-icons-outlined figure">{{ product.icon }}</mat-icon>
 
@@ -6,8 +11,14 @@
 
 <article class="price" *ngIf="!product.isSaleOnly">{{ product.cost }} €</article>
 
-<mat-icon class="material-icons-outlined sale-only" color="warn" *ngIf="product.isSaleOnly">report_problem</mat-icon>
+<mat-icon
+    class="material-icons-outlined sale-only"
+    color="warn"
+    *ngIf="product.isSaleOnly"
+    matTooltip="Achtung! Das Produkt ist nur in bestimmten Mengen verfügbar."
+    >report_problem</mat-icon
+>
 
-<button mat-icon-button color="primary" class="shop">
+<button mat-icon-button color="primary" class="shop" (click)="addToCart()" matTooltip="Zum Warenkorb hinzufügen">
     <mat-icon>add_shopping_cart</mat-icon>
 </button>

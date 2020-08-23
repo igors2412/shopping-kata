@@ -47,4 +47,16 @@ export class ProductViewModel implements IProduct {
     get hasSuperSale(): boolean {
         return this.superSaleCost !== undefined && this.superSaleQuantity !== undefined;
     }
+
+    get minimumQuantity(): number {
+        if (this.cost !== undefined) {
+            return 1;
+        }
+        if (this.saleCost !== undefined) {
+            return this.saleQuantity;
+        }
+        if (this.superSaleCost !== undefined) {
+            return this.superSaleQuantity;
+        }
+    }
 }

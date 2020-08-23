@@ -1,0 +1,31 @@
+:host {
+    display: flex;
+    flex-direction: column;
+
+    .quantity {
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+
+        span {
+            margin-right: 16px;
+        }
+
+        mat-form-field {
+            width: 64px;
+        }
+    }
+
+    .sale {
+        margin-top: 16px;
+    }
+
+    .actions {
+        margin-top: 16px;
+        align-self: flex-end;
+
+        button:last-of-type {
+            margin-left: 8px;
+        }
+    }
+}
