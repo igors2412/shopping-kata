@@ -8,15 +8,17 @@
         <section class="stats">
             <h3>{{ item.product.data.name }}</h3>
             <div class="quantity">
-                <span>Menge:</span>
-                <mat-form-field>
-                    <input
-                        matInput
-                        type="number"
-                        [ngModel]="item.quantity"
-                        (ngModelChange)="updateItemWithQuantity($event, item)"
-                    />
-                </mat-form-field>
+                <aside>
+                    <span>Menge:</span>
+                    <mat-form-field>
+                        <input
+                            matInput
+                            type="number"
+                            [ngModel]="item.quantity"
+                            (ngModelChange)="updateItemWithQuantity($event, item)"
+                        />
+                    </mat-form-field>
+                </aside>
             </div>
         </section>
         <h2 class="price">Preis: {{ item.product.calculatePriceByQuantity(item.quantity) }} €</h2>

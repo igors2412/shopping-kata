@@ -12,9 +12,18 @@
         display: flex;
         flex-wrap: wrap;
 
+        @media (max-width: 500px) {
+            flex-wrap: nowrap;
+            flex-direction: column;
+        }
+
         app-product {
             margin-right: 16px;
             margin-bottom: 16px;
+
+            @media (max-width: 500px) {
+                margin-right: 0;
+            }
         }
     }
 }

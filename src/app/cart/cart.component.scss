@@ -2,9 +2,12 @@
 
 :host {
     .items,
-    .empty,
-    .total {
+    .empty {
         margin-top: 32px;
+
+        @media (max-width: 500px) {
+            margin-top: 16px;
+        }
     }
 
     .empty {
@@ -22,6 +25,15 @@
             position: absolute;
             top: -32px;
             right: 0;
+
+            @media (max-width: 800px) {
+                top: -48px;
+            }
+
+            @media (max-width: 500px) {
+                position: static;
+                margin-bottom: 8px;
+            }
         }
 
         .cart-item {
@@ -31,21 +43,36 @@
             border-radius: 4px;
             padding: 8px 16px;
             box-sizing: border-box;
-            width: 50%;
+            width: 64%;
             position: relative;
+
+            @media (max-width: 800px) {
+                width: 100%;
+            }
+
+            @media (max-width: 500px) {
+                flex-wrap: wrap;
+            }
 
             .delete {
                 position: absolute;
                 top: 0;
-                right: 32px;
+                right: 0;
             }
 
             .figure {
                 font-size: 48px;
                 height: 48px;
                 width: 48px;
-                margin-right: 16px;
+                margin-right: 48px;
                 align-self: center;
+            }
+
+            .stats {
+                aside {
+                    display: flex;
+                    align-items: center;
+                }
             }
 
             .quantity {
@@ -61,7 +88,7 @@
             .price {
                 align-self: flex-end;
                 text-align: end;
-                width: 64%;
+                width: 100%;
             }
         }
     }
