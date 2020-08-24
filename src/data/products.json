@@ -35,6 +35,7 @@
             "id": "E",
             "name": "Tee",
             "icon": "eco",
+            "cost": 10,
             "saleQuantity": 2,
             "saleCost": 7.5
         },

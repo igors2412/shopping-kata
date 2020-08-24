@@ -9,15 +9,7 @@
 
 <h3>{{ product.data.name }}</h3>
 
-<article class="price" *ngIf="!product.isSaleOnly">{{ product.data.cost }} €</article>
-
-<mat-icon
-    class="material-icons-outlined sale-only"
-    color="warn"
-    *ngIf="product.isSaleOnly"
-    matTooltip="Achtung! Das Produkt ist nur in bestimmten Mengen verfügbar."
-    >report_problem</mat-icon
->
+<article class="price">{{ product.data.cost }} €</article>
 
 <button mat-icon-button color="primary" class="shop" (click)="addToCart()" matTooltip="Zum Warenkorb hinzufügen">
     <mat-icon>add_shopping_cart</mat-icon>

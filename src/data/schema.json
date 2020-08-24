@@ -44,7 +44,7 @@
                     "minimum": 0
                 }
             },
-            "required": ["id", "name", "icon"]
+            "required": ["id", "name", "icon", "cost"]
         }
     }
 }

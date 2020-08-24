@@ -1,6 +1,5 @@
 <h3>{{ title }}</h3>
 
-<article *ngIf="product.minimumQuantity > 1">Das Produkt kann nur ab einer bestimmten Menge bestellt werden.</article>
 <article class="sale" *ngIf="product.hasSale || product.hasSuperSale">Sparangebot:</article>
 <article *ngIf="product.hasSale" class="small">
     {{ product.data.saleQuantity }} für {{ product.data.saleCost * product.data.saleQuantity }} €.

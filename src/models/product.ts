@@ -6,7 +6,7 @@ export interface IProduct {
     // https://material.io/resources/icons/?style=baseline
     icon: string;
 
-    cost?: number;
+    cost: number;
 
     saleCost?: number;
     saleQuantity?: number;
@@ -18,10 +18,6 @@ export interface IProduct {
 export class ProductViewModel {
     constructor(public readonly data: IProduct) {}
 
-    get isSaleOnly(): boolean {
-        return this.data.cost === undefined;
-    }
-
     get hasSale(): boolean {
         return this.data.saleCost !== undefined && this.data.saleQuantity !== undefined;
     }
@@ -31,15 +27,14 @@ export class ProductViewModel {
     }
 
     get minimumQuantity(): number {
-        if (this.data.cost !== undefined) {
-            return 1;
-        }
         if (this.data.saleCost !== undefined) {
             return this.data.saleQuantity;
         }
         if (this.data.superSaleCost !== undefined) {
             return this.data.superSaleQuantity;
         }
+
+        return 1;
     }
 
     calculatePriceByQuantity(quantity: number): number {
@@ -55,10 +50,8 @@ export class ProductViewModel {
             );
         } else if (this.hasSale && quantity >= this.data.saleQuantity) {
             return this.calculatePriceFragmentByQuantity(quantity, this.data.saleCost, this.data.saleQuantity);
-        } else if (!this.isSaleOnly) {
-            return quantity * this.data.cost;
         } else {
-            throw new Error(`Faulty data model for product with id: ${this.data.id}`);
+            return quantity * this.data.cost;
         }
     }
 

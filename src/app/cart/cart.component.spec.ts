@@ -33,7 +33,7 @@ describe('A Cart Component', () => {
 
     it('should calculate correct price for cart: A', () => {
         const a = testData.products.filter((p) => p.id === 'A')[0];
-        component.items = [{ product: ProductViewModel.factory(a), quantity: 1 }];
+        component.items = [{ product: new ProductViewModel(a), quantity: 1 }];
 
         expect(component.totalPrice).toBe(50);
     });
@@ -42,8 +42,8 @@ describe('A Cart Component', () => {
         const a = testData.products.filter((p) => p.id === 'A')[0];
         const b = testData.products.filter((p) => p.id === 'B')[0];
         component.items = [
-            { product: ProductViewModel.factory(a), quantity: 1 },
-            { product: ProductViewModel.factory(b), quantity: 1 },
+            { product: new ProductViewModel(a), quantity: 1 },
+            { product: new ProductViewModel(b), quantity: 1 },
         ];
 
         expect(component.totalPrice).toBe(80);
@@ -55,10 +55,10 @@ describe('A Cart Component', () => {
         const c = testData.products.filter((p) => p.id === 'C')[0];
         const d = testData.products.filter((p) => p.id === 'D')[0];
         component.items = [
-            { product: ProductViewModel.factory(c), quantity: 1 },
-            { product: ProductViewModel.factory(d), quantity: 1 },
-            { product: ProductViewModel.factory(b), quantity: 1 },
-            { product: ProductViewModel.factory(a), quantity: 1 },
+            { product: new ProductViewModel(c), quantity: 1 },
+            { product: new ProductViewModel(d), quantity: 1 },
+            { product: new ProductViewModel(b), quantity: 1 },
+            { product: new ProductViewModel(a), quantity: 1 },
         ];
 
         expect(component.totalPrice).toBe(115);
@@ -66,35 +66,35 @@ describe('A Cart Component', () => {
 
     it('should calculate correct price for cart: A,A', () => {
         const a = testData.products.filter((p) => p.id === 'A')[0];
-        component.items = [{ product: ProductViewModel.factory(a), quantity: 2 }];
+        component.items = [{ product: new ProductViewModel(a), quantity: 2 }];
 
         expect(component.totalPrice).toBe(90);
     });
 
     it('should calculate correct price for cart: A,A,A', () => {
         const a = testData.products.filter((p) => p.id === 'A')[0];
-        component.items = [{ product: ProductViewModel.factory(a), quantity: 3 }];
+        component.items = [{ product: new ProductViewModel(a), quantity: 3 }];
 
         expect(component.totalPrice).toBe(130);
     });
 
     it('should calculate correct price for cart: A,A,A,A', () => {
         const a = testData.products.filter((p) => p.id === 'A')[0];
-        component.items = [{ product: ProductViewModel.factory(a), quantity: 4 }];
+        component.items = [{ product: new ProductViewModel(a), quantity: 4 }];
 
         expect(component.totalPrice).toBe(180);
     });
 
     it('should calculate correct price for cart: A,A,A,A,A', () => {
         const a = testData.products.filter((p) => p.id === 'A')[0];
-        component.items = [{ product: ProductViewModel.factory(a), quantity: 5 }];
+        component.items = [{ product: new ProductViewModel(a), quantity: 5 }];
 
         expect(component.totalPrice).toBe(220);
     });
 
     it('should calculate correct price for cart: A,A,A,A,A,A', () => {
         const a = testData.products.filter((p) => p.id === 'A')[0];
-        component.items = [{ product: ProductViewModel.factory(a), quantity: 6 }];
+        component.items = [{ product: new ProductViewModel(a), quantity: 6 }];
 
         expect(component.totalPrice).toBe(260);
     });
@@ -103,8 +103,8 @@ describe('A Cart Component', () => {
         const a = testData.products.filter((p) => p.id === 'A')[0];
         const b = testData.products.filter((p) => p.id === 'B')[0];
         component.items = [
-            { product: ProductViewModel.factory(a), quantity: 3 },
-            { product: ProductViewModel.factory(b), quantity: 1 },
+            { product: new ProductViewModel(a), quantity: 3 },
+            { product: new ProductViewModel(b), quantity: 1 },
         ];
 
         expect(component.totalPrice).toBe(160);
@@ -114,8 +114,8 @@ describe('A Cart Component', () => {
         const a = testData.products.filter((p) => p.id === 'A')[0];
         const b = testData.products.filter((p) => p.id === 'B')[0];
         component.items = [
-            { product: ProductViewModel.factory(a), quantity: 3 },
-            { product: ProductViewModel.factory(b), quantity: 2 },
+            { product: new ProductViewModel(a), quantity: 3 },
+            { product: new ProductViewModel(b), quantity: 2 },
         ];
 
         expect(component.totalPrice).toBe(175);
@@ -126,9 +126,9 @@ describe('A Cart Component', () => {
         const b = testData.products.filter((p) => p.id === 'B')[0];
         const d = testData.products.filter((p) => p.id === 'D')[0];
         component.items = [
-            { product: ProductViewModel.factory(a), quantity: 3 },
-            { product: ProductViewModel.factory(b), quantity: 2 },
-            { product: ProductViewModel.factory(d), quantity: 1 },
+            { product: new ProductViewModel(a), quantity: 3 },
+            { product: new ProductViewModel(b), quantity: 2 },
+            { product: new ProductViewModel(d), quantity: 1 },
         ];
 
         expect(component.totalPrice).toBe(190);
@@ -139,9 +139,9 @@ describe('A Cart Component', () => {
         const b = testData.products.filter((p) => p.id === 'B')[0];
         const d = testData.products.filter((p) => p.id === 'D')[0];
         component.items = [
-            { product: ProductViewModel.factory(a), quantity: 3 },
-            { product: ProductViewModel.factory(b), quantity: 2 },
-            { product: ProductViewModel.factory(d), quantity: 1 },
+            { product: new ProductViewModel(a), quantity: 3 },
+            { product: new ProductViewModel(b), quantity: 2 },
+            { product: new ProductViewModel(d), quantity: 1 },
         ];
 
         expect(component.totalPrice).toBe(190);
@@ -149,21 +149,21 @@ describe('A Cart Component', () => {
 
     it('should calculate correct price for cart: F,F,F,F', () => {
         const f = testData.products.filter((p) => p.id === 'F')[0];
-        component.items = [{ product: ProductViewModel.factory(f), quantity: 4 }];
+        component.items = [{ product: new ProductViewModel(f), quantity: 4 }];
 
         expect(component.totalPrice).toBe(40);
     });
 
     it('should calculate correct price for cart: F,F,F,F,F,F,F,F', () => {
         const f = testData.products.filter((p) => p.id === 'F')[0];
-        component.items = [{ product: ProductViewModel.factory(f), quantity: 8 }];
+        component.items = [{ product: new ProductViewModel(f), quantity: 8 }];
 
         expect(component.totalPrice).toBe(50);
     });
 
     it('should calculate correct price for cart: F,F,F,F,F,F,F,F,F,F', () => {
         const f = testData.products.filter((p) => p.id === 'F')[0];
-        component.items = [{ product: ProductViewModel.factory(f), quantity: 10 }];
+        component.items = [{ product: new ProductViewModel(f), quantity: 10 }];
 
         expect(component.totalPrice).toBe(70);
     });
@@ -172,8 +172,8 @@ describe('A Cart Component', () => {
         const d = testData.products.filter((p) => p.id === 'D')[0];
         const f = testData.products.filter((p) => p.id === 'F')[0];
         component.items = [
-            { product: ProductViewModel.factory(d), quantity: 1 },
-            { product: ProductViewModel.factory(f), quantity: 10 },
+            { product: new ProductViewModel(d), quantity: 1 },
+            { product: new ProductViewModel(f), quantity: 10 },
         ];
 
         expect(component.totalPrice).toBe(85);
@@ -183,8 +183,8 @@ describe('A Cart Component', () => {
         const d = testData.products.filter((p) => p.id === 'D')[0];
         const e = testData.products.filter((p) => p.id === 'E')[0];
         component.items = [
-            { product: ProductViewModel.factory(d), quantity: 1 },
-            { product: ProductViewModel.factory(e), quantity: 4 },
+            { product: new ProductViewModel(d), quantity: 1 },
+            { product: new ProductViewModel(e), quantity: 4 },
         ];
 
         expect(component.totalPrice).toBe(45);
