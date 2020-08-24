@@ -5,7 +5,7 @@ import { ProductViewModel } from 'src/models';
 import * as testData from '../../data/products.json';
 import { CartComponent } from './cart.component';
 
-fdescribe('A Cart Component', () => {
+describe('A Cart Component', () => {
     let component: CartComponent;
     let fixture: ComponentFixture<CartComponent>;
 
@@ -26,8 +26,6 @@ fdescribe('A Cart Component', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-
-    xit('should correctly assign quantities to products', () => {});
 
     it('should calculate correct price for empty cart', () => {
         expect(component.totalPrice).toBe(0);
@@ -70,7 +68,7 @@ fdescribe('A Cart Component', () => {
         const a = testData.products.filter((p) => p.id === 'A')[0];
         component.items = [{ product: ProductViewModel.factory(a), quantity: 2 }];
 
-        expect(component.totalPrice).toBe(50);
+        expect(component.totalPrice).toBe(90);
     });
 
     it('should calculate correct price for cart: A,A,A', () => {
@@ -153,7 +151,7 @@ fdescribe('A Cart Component', () => {
         const f = testData.products.filter((p) => p.id === 'F')[0];
         component.items = [{ product: ProductViewModel.factory(f), quantity: 4 }];
 
-        expect(component.totalPrice).toBe(30);
+        expect(component.totalPrice).toBe(40);
     });
 
     it('should calculate correct price for cart: F,F,F,F,F,F,F,F', () => {
@@ -167,18 +165,18 @@ fdescribe('A Cart Component', () => {
         const f = testData.products.filter((p) => p.id === 'F')[0];
         component.items = [{ product: ProductViewModel.factory(f), quantity: 10 }];
 
-        expect(component.totalPrice).toBe(60);
+        expect(component.totalPrice).toBe(70);
     });
 
     it('should calculate correct price for cart: F,F,F,F,F,D,F,F,F,F,F', () => {
         const d = testData.products.filter((p) => p.id === 'D')[0];
         const f = testData.products.filter((p) => p.id === 'F')[0];
         component.items = [
-            { product: ProductViewModel.factory(d), quantity: 2 },
+            { product: ProductViewModel.factory(d), quantity: 1 },
             { product: ProductViewModel.factory(f), quantity: 10 },
         ];
 
-        expect(component.totalPrice).toBe(75);
+        expect(component.totalPrice).toBe(85);
     });
 
     it('should calculate correct price for cart: E,E,E,D,E', () => {

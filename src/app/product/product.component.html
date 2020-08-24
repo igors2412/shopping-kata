@@ -5,11 +5,11 @@
     >new_releases</mat-icon
 >
 
-<mat-icon class="material-icons-outlined figure">{{ product.icon }}</mat-icon>
+<mat-icon class="material-icons-outlined figure">{{ product.data.icon }}</mat-icon>
 
-<h3>{{ product.name }}</h3>
+<h3>{{ product.data.name }}</h3>
 
-<article class="price" *ngIf="!product.isSaleOnly">{{ product.cost }} €</article>
+<article class="price" *ngIf="!product.isSaleOnly">{{ product.data.cost }} €</article>
 
 <mat-icon
     class="material-icons-outlined sale-only"

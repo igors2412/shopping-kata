@@ -15,48 +15,30 @@ export interface IProduct {
     superSaleQuantity?: number;
 }
 
-export class ProductViewModel implements IProduct {
-    id: string;
-    name: string;
-    icon: string;
-
-    cost: number | undefined;
-    saleCost: number | undefined;
-    saleQuantity: number | undefined;
-    superSaleCost: number | undefined;
-    superSaleQuantity: number | undefined;
-
-    static factory(product: IProduct): ProductViewModel {
-        const vm = new ProductViewModel();
-
-        for (const key in product) {
-            vm[key] = product[key];
-        }
-
-        return vm;
-    }
+export class ProductViewModel {
+    constructor(public readonly data: IProduct) {}
 
     get isSaleOnly(): boolean {
-        return this.cost === undefined;
+        return this.data.cost === undefined;
     }
 
     get hasSale(): boolean {
-        return this.saleCost !== undefined && this.saleQuantity !== undefined;
+        return this.data.saleCost !== undefined && this.data.saleQuantity !== undefined;
     }
 
     get hasSuperSale(): boolean {
-        return this.superSaleCost !== undefined && this.superSaleQuantity !== undefined;
+        return this.data.superSaleCost !== undefined && this.data.superSaleQuantity !== undefined;
     }
 
     get minimumQuantity(): number {
-        if (this.cost !== undefined) {
+        if (this.data.cost !== undefined) {
             return 1;
         }
-        if (this.saleCost !== undefined) {
-            return this.saleQuantity;
+        if (this.data.saleCost !== undefined) {
+            return this.data.saleQuantity;
         }
-        if (this.superSaleCost !== undefined) {
-            return this.superSaleQuantity;
+        if (this.data.superSaleCost !== undefined) {
+            return this.data.superSaleQuantity;
         }
     }
 
@@ -65,24 +47,27 @@ export class ProductViewModel implements IProduct {
             return 0;
         }
 
-        if (this.hasSuperSale && quantity >= this.superSaleQuantity) {
-            return this.calculatePriceFragmentByQuantity(quantity, this.superSaleCost, this.superSaleQuantity);
-        } else if (this.hasSale && quantity >= this.saleQuantity) {
-            return this.calculatePriceFragmentByQuantity(quantity, this.saleCost, this.saleQuantity);
+        if (this.hasSuperSale && quantity >= this.data.superSaleQuantity) {
+            return this.calculatePriceFragmentByQuantity(
+                quantity,
+                this.data.superSaleCost,
+                this.data.superSaleQuantity
+            );
+        } else if (this.hasSale && quantity >= this.data.saleQuantity) {
+            return this.calculatePriceFragmentByQuantity(quantity, this.data.saleCost, this.data.saleQuantity);
         } else if (!this.isSaleOnly) {
-            return quantity * this.cost;
+            return quantity * this.data.cost;
         } else {
-            throw new Error(`Faulty data model for product with id: ${this.id}`);
+            throw new Error(`Faulty data model for product with id: ${this.data.id}`);
         }
     }
 
     private calculatePriceFragmentByQuantity(quantity: number, saleCost: number, saleQuantity: number): number {
         const remainder = quantity % saleQuantity;
-
-        if (remainder === 0) {
-            return quantity * saleCost;
-        } else {
-            return this.calculatePriceByQuantity(remainder) + this.calculatePriceByQuantity(quantity - remainder);
-        }
+        const result =
+            remainder === 0
+                ? quantity * saleCost
+                : this.calculatePriceByQuantity(remainder) + this.calculatePriceByQuantity(quantity - remainder);
+        return Math.round(result);
     }
 }

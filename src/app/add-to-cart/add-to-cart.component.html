@@ -1,18 +1,18 @@
 <h3>{{ title }}</h3>
 
-<article *ngIf="data.minimumQuantity > 1">Das Produkt kann nur ab einer bestimmten Menge bestellt werden.</article>
-<article class="sale" *ngIf="data.hasSale || data.hasSuperSale">Sparangebot:</article>
-<article *ngIf="data.hasSale" class="small">
-    {{ data.saleQuantity }} für {{ data.saleCost * data.saleQuantity }} €.
+<article *ngIf="product.minimumQuantity > 1">Das Produkt kann nur ab einer bestimmten Menge bestellt werden.</article>
+<article class="sale" *ngIf="product.hasSale || product.hasSuperSale">Sparangebot:</article>
+<article *ngIf="product.hasSale" class="small">
+    {{ product.data.saleQuantity }} für {{ product.data.saleCost * product.data.saleQuantity }} €.
 </article>
-<article *ngIf="data.hasSuperSale" class="small">
-    {{ data.superSaleQuantity }} für {{ data.superSaleCost * data.superSaleQuantity }} €.
+<article *ngIf="product.hasSuperSale" class="small">
+    {{ product.data.superSaleQuantity }} für {{ product.data.superSaleCost * product.data.superSaleQuantity }} €.
 </article>
 
 <div class="quantity">
     <span>Menge:</span>
     <mat-form-field>
-        <input matInput type="number" [min]="data.minimumQuantity" [formControl]="quantityForm" />
+        <input matInput type="number" [min]="product.minimumQuantity" [formControl]="quantityForm" />
     </mat-form-field>
 </div>
 

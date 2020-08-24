@@ -4,17 +4,25 @@
     <h2 class="total">Summe: {{ totalPrice }} €</h2>
 
     <aside *ngFor="let item of items" class="cart-item">
-        <mat-icon class="figure">{{ item.product.icon }}</mat-icon>
+        <mat-icon class="figure">{{ item.product.data.icon }}</mat-icon>
         <section class="stats">
-            <h3>{{ item.product.name }}</h3>
+            <h3>{{ item.product.data.name }}</h3>
             <div class="quantity">
                 <span>Menge:</span>
                 <mat-form-field>
-                    <input matInput type="number" [(ngModel)]="item.quantity" />
+                    <input
+                        matInput
+                        type="number"
+                        [ngModel]="item.quantity"
+                        (ngModelChange)="updateItemWithQuantity($event, item)"
+                    />
                 </mat-form-field>
             </div>
         </section>
         <h2 class="price">Preis: {{ item.product.calculatePriceByQuantity(item.quantity) }} €</h2>
+        <button mat-icon-button class="delete" color="warn" (click)="removeItem(item)" matTooltip="Produkt löschen">
+            <mat-icon class="material-icons-outlined">delete</mat-icon>
+        </button>
     </aside>
 </div>
 

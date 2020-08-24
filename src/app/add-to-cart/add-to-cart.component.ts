@@ -15,23 +15,23 @@ export class AddToCartComponent implements OnInit {
     constructor(
         private readonly cartService: CartService,
         public dialogRef: MatDialogRef<AddToCartComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: ProductViewModel
+        @Inject(MAT_DIALOG_DATA) public product: ProductViewModel
     ) {}
 
     ngOnInit(): void {
-        this.quantityForm = new FormControl(this.data.minimumQuantity, [
-            Validators.min(this.data.minimumQuantity),
+        this.quantityForm = new FormControl(this.product.minimumQuantity, [
+            Validators.min(this.product.minimumQuantity),
             Validators.required,
         ]);
     }
 
     get title(): string {
-        return `${this.data.name} zum Warenkorb hinzufügen?`;
+        return `${this.product.data.name} zum Warenkorb hinzufügen?`;
     }
 
     addToCart(): void {
         const item: ICartItem = {
-            product: this.data,
+            product: this.product,
             quantity: this.quantityForm.value,
         };
 

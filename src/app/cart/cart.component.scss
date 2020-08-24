@@ -32,6 +32,13 @@
             padding: 8px 16px;
             box-sizing: border-box;
             width: 50%;
+            position: relative;
+
+            .delete {
+                position: absolute;
+                top: 0;
+                right: 32px;
+            }
 
             .figure {
                 font-size: 48px;

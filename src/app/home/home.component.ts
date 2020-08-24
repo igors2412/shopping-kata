@@ -20,6 +20,6 @@ export class HomeComponent implements OnInit {
 
     private gotData(products: IProduct[]): void {
         this.isLoading = false;
-        this.products = products.map((p) => ProductViewModel.factory(p));
+        this.products = products.map((p) => new ProductViewModel(p));
     }
 }

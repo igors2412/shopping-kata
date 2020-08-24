@@ -18,30 +18,30 @@ export class CartComponent implements OnInit, OnDestroy {
     }
 
     get totalPrice(): number {
-        const price = this.items.reduce((a, b) => a + b.product.calculatePriceByQuantity(b.quantity), 0);
-        return Math.round(price);
+        return this.items.reduce((a, b) => a + b.product.calculatePriceByQuantity(b.quantity), 0);
     }
 
     constructor(private readonly cartService: CartService) {}
 
     ngOnInit(): void {
-        this.addSub = this.cartService.itemAdded.subscribe((item) => this.gotItem(item));
+        this.items = this.cartService.cartItems;
+        this.addSub = this.cartService.cartChanged.subscribe((items) => this.gotItems(items));
     }
 
     ngOnDestroy(): void {
         this.addSub.unsubscribe();
     }
 
-    private gotItem(item: ICartItem): void {
-        const existingItem = this.items.filter((i) => i.product.id === item.product.id)[0];
-        if (existingItem === undefined) {
-            this.items.push(item);
-        } else {
-            existingItem.quantity += item.quantity;
-        }
+    private gotItems(items: ICartItem[]): void {
+        this.items = items;
     }
 
-    clearCart(): void {
-        this.items = [];
+    removeItem(item: ICartItem): void {
+        this.cartService.removeItem(item);
+    }
+
+    updateItemWithQuantity(quantity: number, item: ICartItem): void {
+        item.quantity = quantity;
+        this.cartService.updateItemQuantity(item);
     }
 }
