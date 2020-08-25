@@ -1,15 +1,32 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { By } from '@angular/platform-browser';
+import { IProduct, ProductViewModel } from 'src/models';
+import * as testData from '../../data/products.json';
+import { CartService } from '../services';
 import { AddToCartComponent } from './add-to-cart.component';
 
-describe('AddToCartComponent', () => {
+describe('an add to cart component', () => {
     let component: AddToCartComponent;
     let fixture: ComponentFixture<AddToCartComponent>;
+
+    const products = testData.products as IProduct[];
+    const testProduct = new ProductViewModel(products[0]);
+
+    const fakeCartService = jasmine.createSpyObj('CartService', ['addItem']);
+    const fakeDialogRef = jasmine.createSpyObj('MatDialogRef', ['close']);
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [AddToCartComponent],
             imports: [MatDialogModule],
+            schemas: [NO_ERRORS_SCHEMA],
+            providers: [
+                { provide: CartService, useValue: fakeCartService },
+                { provide: MatDialogRef, useValue: fakeDialogRef },
+                { provide: MAT_DIALOG_DATA, useValue: testProduct },
+            ],
         }).compileComponents();
     }));
 
@@ -21,5 +38,16 @@ describe('AddToCartComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should update the cart when adding a product', () => {
+        component.addToCart();
+        expect(fakeCartService.addItem).toHaveBeenCalled();
+    });
+
+    it('should set the minimum input value according to product data', () => {
+        const inputElem = fixture.debugElement.query(By.css('.quantity input'));
+        const inputMin = inputElem.attributes['min'];
+        expect(inputMin).toBe(component.product.minimumQuantity.toString());
     });
 });

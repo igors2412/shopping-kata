@@ -13,6 +13,7 @@
                     <mat-form-field>
                         <input
                             matInput
+                            [min]="item.product.minimumQuantity"
                             type="number"
                             [ngModel]="item.quantity"
                             (ngModelChange)="updateItemWithQuantity($event, item)"

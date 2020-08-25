@@ -11,7 +11,7 @@ import { CartService } from '../services';
 export class CartComponent implements OnInit, OnDestroy {
     items: ICartItem[] = [];
 
-    private addSub: Subscription;
+    private cartSub: Subscription;
 
     get isEmpty(): boolean {
         return this.items.length === 0;
@@ -25,11 +25,11 @@ export class CartComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.items = this.cartService.cartItems;
-        this.addSub = this.cartService.cartChanged.subscribe((items) => this.gotItems(items));
+        this.cartSub = this.cartService.cartChanged.subscribe((items) => this.gotItems(items));
     }
 
     ngOnDestroy(): void {
-        this.addSub.unsubscribe();
+        this.cartSub.unsubscribe();
     }
 
     private gotItems(items: ICartItem[]): void {

@@ -50,6 +50,8 @@ export class ProductViewModel {
             );
         } else if (this.hasSale && quantity >= this.data.saleQuantity) {
             return this.calculatePriceFragmentByQuantity(quantity, this.data.saleCost, this.data.saleQuantity);
+        } else if (this.data.cost === undefined) {
+            throw new Error(`Data model error. Cannot calculate price.`);
         } else {
             return quantity * this.data.cost;
         }

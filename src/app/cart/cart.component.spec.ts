@@ -1,23 +1,26 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
+import { By } from '@angular/platform-browser';
 import { ProductViewModel } from 'src/models';
 import * as testData from '../../data/products.json';
+import { EmptyLogoComponent } from '../empty-logo/empty-logo.component';
 import { CartComponent } from './cart.component';
 
-describe('A Cart Component', () => {
+describe('a cart component', () => {
     let component: CartComponent;
     let fixture: ComponentFixture<CartComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [CartComponent],
+            declarations: [CartComponent, EmptyLogoComponent],
             schemas: [NO_ERRORS_SCHEMA],
             imports: [MatIconModule],
         }).compileComponents();
     }));
 
     beforeEach(() => {
+        localStorage.clear();
         fixture = TestBed.createComponent(CartComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -190,18 +193,27 @@ describe('A Cart Component', () => {
         expect(component.totalPrice).toBe(45);
     });
 
-    xit('should throw error on scan of unknown article', () => {
-        // pricingRulesService.pricingRuleValueObjects = pricingRuleValueObjects;
-        // expect((): void => service.scan('X')).toThrowError(Error);
+    it('should throw error when calculating the price without pricing rules', () => {
+        const d = testData.products.filter((p) => p.id === 'D')[0];
+        const dCopy = { ...d };
+        delete dCopy.cost;
+        component.items = [{ product: new ProductViewModel(dCopy), quantity: 1 }];
+
+        expect(() => component.totalPrice).toThrow();
     });
 
-    xit('should throw error on unknown price for package size', () => {
-        // pricingRulesService.pricingRuleValueObjects = pricingRuleValueObjects;
-        // service.scan('E');
-        // expect((): number => service.getTotalPrice()).toThrowError(Error);
+    it('should show a message when the cart is empty', () => {
+        expect(component.isEmpty).toBeTrue();
+        const emptyComp = fixture.debugElement.query(By.css('app-empty-logo'));
+        expect(emptyComp).not.toBeNull();
     });
 
-    xit('should throw error on call to getTotalPrice without pricing rules', () => {
-        // expect((): number => service.getTotalPrice()).toThrowError(Error);
+    it('should set the minimum input value according to product data', () => {
+        const a = testData.products.filter((p) => p.id === 'A')[0];
+        component.items = [{ product: new ProductViewModel(a), quantity: 3 }];
+        fixture.detectChanges();
+        const inputElem = fixture.debugElement.query(By.css('.quantity input'));
+        const inputMin = inputElem.attributes['min'];
+        expect(inputMin).toBe(component.items[0].product.minimumQuantity.toString());
     });
 });

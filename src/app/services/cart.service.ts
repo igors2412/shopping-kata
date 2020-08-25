@@ -9,7 +9,7 @@ export class CartService {
     private _cartChanged = new Subject<ICartItem[]>();
     readonly cartChanged = this._cartChanged.asObservable();
 
-    private readonly _cartItems: ICartItem[];
+    private _cartItems: ICartItem[];
     private readonly storageKey = 'bvv-shopping-kata';
 
     get itemCount(): number {
@@ -57,6 +57,11 @@ export class CartService {
         }
     }
 
+    clearCartStorage(): void {
+        this._cartItems = [];
+        this.updateStorage();
+    }
+
     getCartItemById(id: string): ICartItem | undefined {
         return this._cartItems.filter((ci) => ci.product.data.id === id)[0];
     }
@@ -91,11 +96,11 @@ export class CartService {
     }
 }
 
-interface IStorableCart {
+export interface IStorableCart {
     items: IStorableCartItem[];
 }
 
-interface IStorableCartItem {
+export interface IStorableCartItem {
     product: IProduct;
     quantity: number;
 }

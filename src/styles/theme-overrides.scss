@@ -1,0 +1,29 @@
+@use './colors.scss';
+
+.mat-flat-button {
+    border-radius: 2px;
+    background-color: colors.$body-bg;
+    font-family: 'Noto Sans', sans-serif;
+
+    &.mat-primary {
+        background-color: colors.$accent-dark;
+    }
+}
+
+.mat-icon-button {
+    &.mat-primary {
+        color: colors.$accent-dark;
+    }
+
+    &.mat-warn {
+        color: colors.$error;
+    }
+}
+
+mat-dialog-container.mat-dialog-container {
+    padding: 16px;
+}
+
+.mat-badge-content {
+    background-color: colors.$error;
+}

@@ -1,3 +1,7 @@
 svg {
     height: 400px;
+
+    @media (max-width: 640px) {
+        height: auto;
+    }
 }
