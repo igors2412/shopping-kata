@@ -11,13 +11,11 @@
                 <aside>
                     <span>Menge:</span>
                     <mat-form-field>
-                        <input
-                            matInput
-                            [min]="item.product.minimumQuantity"
-                            type="number"
-                            [ngModel]="item.quantity"
-                            (ngModelChange)="updateItemWithQuantity($event, item)"
-                        />
+                        <mat-select [ngModel]="item.quantity" (ngModelChange)="updateItemWithQuantity($event, item)">
+                            <mat-option *ngFor="let q of item.product.quantitiySelection" [value]="q">{{
+                                q
+                            }}</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </aside>
             </div>

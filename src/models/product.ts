@@ -16,6 +16,8 @@ export interface IProduct {
 }
 
 export class ProductViewModel {
+    readonly quantitiySelection = Array.from(Array(20), (_, i) => i + 1);
+
     constructor(public readonly data: IProduct) {}
 
     get hasSale(): boolean {
@@ -24,17 +26,6 @@ export class ProductViewModel {
 
     get hasSuperSale(): boolean {
         return this.data.superSaleCost !== undefined && this.data.superSaleQuantity !== undefined;
-    }
-
-    get minimumQuantity(): number {
-        if (this.data.saleCost !== undefined) {
-            return this.data.saleQuantity;
-        }
-        if (this.data.superSaleCost !== undefined) {
-            return this.data.superSaleQuantity;
-        }
-
-        return 1;
     }
 
     calculatePriceByQuantity(quantity: number): number {

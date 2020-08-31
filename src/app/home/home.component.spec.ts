@@ -2,7 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { of } from 'rxjs';
-import * as testData from '../../data/products.json';
+import * as testData from '../../data/test-products.json';
 import { ProductService } from '../services';
 import { HomeComponent } from './home.component';
 
@@ -37,7 +37,7 @@ describe('a home component', () => {
         component.ngOnInit();
         expect(component.products.length).toBe(testProducts.length);
 
-        const hasViewModel = component.products.every((p) => p.minimumQuantity);
+        const hasViewModel = component.products.every((p) => p !== undefined);
         expect(hasViewModel).toBeTruthy();
     });
 });

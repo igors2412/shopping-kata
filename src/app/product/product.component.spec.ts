@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
 import { ProductViewModel } from 'src/models';
@@ -11,10 +11,13 @@ describe('a product component', () => {
     let fixture: ComponentFixture<ProductComponent>;
     const testProducts = testData.products;
 
+    const fakeDialog = jasmine.createSpyObj('MatDialog', ['open']);
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [ProductComponent],
             imports: [MatDialogModule, MatIconModule],
+            providers: [{ provide: MatDialog, useValue: fakeDialog }],
         }).compileComponents();
     }));
 
@@ -68,5 +71,10 @@ describe('a product component', () => {
 
         const result = fixture.debugElement.query(By.css('.sale'));
         expect(result).toBeNull();
+    });
+
+    it('should show the "add to cart" dialog when selected', () => {
+        component.addToCart();
+        expect(fakeDialog.open).toHaveBeenCalled();
     });
 });

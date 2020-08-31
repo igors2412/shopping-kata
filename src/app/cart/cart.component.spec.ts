@@ -2,9 +2,10 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { By } from '@angular/platform-browser';
-import { ProductViewModel } from 'src/models';
-import * as testData from '../../data/products.json';
+import { ICartItem, ProductViewModel } from 'src/models';
+import * as testData from '../../data/test-products.json';
 import { EmptyLogoComponent } from '../empty-logo/empty-logo.component';
+import { CartService } from '../services';
 import { CartComponent } from './cart.component';
 
 describe('a cart component', () => {
@@ -31,6 +32,13 @@ describe('a cart component', () => {
     });
 
     it('should calculate correct price for empty cart', () => {
+        expect(component.totalPrice).toBe(0);
+    });
+
+    it('should correctly calculate 0 quantity', () => {
+        const a = testData.products.filter((p) => p.id === 'A')[0];
+        component.items = [{ product: new ProductViewModel(a), quantity: 0 }];
+
         expect(component.totalPrice).toBe(0);
     });
 
@@ -208,12 +216,59 @@ describe('a cart component', () => {
         expect(emptyComp).not.toBeNull();
     });
 
-    it('should set the minimum input value according to product data', () => {
-        const a = testData.products.filter((p) => p.id === 'A')[0];
-        component.items = [{ product: new ProductViewModel(a), quantity: 3 }];
+    it('should generate a selection of 20 possible product quantities', () => {
+        component.items = [{ quantity: 1, product: new ProductViewModel(testData.products[0]) }];
         fixture.detectChanges();
-        const inputElem = fixture.debugElement.query(By.css('.quantity input'));
-        const inputMin = inputElem.attributes['min'];
-        expect(inputMin).toBe(component.items[0].product.minimumQuantity.toString());
+        const inputElem = fixture.debugElement.queryAll(By.css('mat-option'));
+        expect(inputElem.length).toBe(20);
+    });
+
+    it('should update the cart items via subscription', () => {
+        const cartService = TestBed.inject(CartService);
+        component.ngOnInit();
+        expect(component.items).toEqual([]);
+
+        const item: ICartItem = {
+            product: new ProductViewModel(testData.products[0]),
+            quantity: 1,
+        };
+        cartService.addItem(item);
+
+        expect(component.items).toEqual([item]);
+    });
+
+    it('should notifiy other subscribers when a cart item is removed', () => {
+        const cartService = TestBed.inject(CartService);
+        component.ngOnInit();
+        expect(component.items).toEqual([]);
+
+        const item: ICartItem = {
+            product: new ProductViewModel(testData.products[0]),
+            quantity: 1,
+        };
+        cartService.addItem(item);
+
+        spyOn(cartService, 'removeItem');
+        component.removeItem(item);
+
+        expect(cartService.removeItem).toHaveBeenCalledWith(item);
+    });
+
+    it('should notifiy other subscribers when the quantity of a product was updated', () => {
+        const cartService = TestBed.inject(CartService);
+        component.ngOnInit();
+        expect(component.items).toEqual([]);
+
+        const item: ICartItem = {
+            product: new ProductViewModel(testData.products[0]),
+            quantity: 1,
+        };
+        cartService.addItem(item);
+
+        spyOn(cartService, 'updateItemQuantity');
+        component.updateItemWithQuantity(5, item);
+
+        expect(item.quantity).toBe(5);
+        expect(cartService.updateItemQuantity).toHaveBeenCalledWith(item);
     });
 });

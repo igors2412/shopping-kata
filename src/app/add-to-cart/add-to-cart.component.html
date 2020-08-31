@@ -11,7 +11,9 @@
 <div class="quantity">
     <span>Menge:</span>
     <mat-form-field>
-        <input matInput type="number" [min]="product.minimumQuantity" [formControl]="quantityForm" />
+        <mat-select [formControl]="quantityForm">
+            <mat-option *ngFor="let q of product.quantitiySelection" [value]="q">{{ q }}</mat-option>
+        </mat-select>
     </mat-form-field>
 </div>
 

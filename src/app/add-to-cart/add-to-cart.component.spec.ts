@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { By } from '@angular/platform-browser';
 import { IProduct, ProductViewModel } from 'src/models';
-import * as testData from '../../data/products.json';
+import * as testData from '../../data/test-products.json';
 import { CartService } from '../services';
 import { AddToCartComponent } from './add-to-cart.component';
 
@@ -45,9 +45,8 @@ describe('an add to cart component', () => {
         expect(fakeCartService.addItem).toHaveBeenCalled();
     });
 
-    it('should set the minimum input value according to product data', () => {
-        const inputElem = fixture.debugElement.query(By.css('.quantity input'));
-        const inputMin = inputElem.attributes['min'];
-        expect(inputMin).toBe(component.product.minimumQuantity.toString());
+    it('should generate a selection of 20 possible product quantities', () => {
+        const inputElem = fixture.debugElement.queryAll(By.css('mat-option'));
+        expect(inputElem.length).toBe(20);
     });
 });

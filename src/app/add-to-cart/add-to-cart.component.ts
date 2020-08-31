@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ICartItem, ProductViewModel } from 'src/models';
 import { CartService } from '../services';
@@ -19,10 +19,7 @@ export class AddToCartComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.quantityForm = new FormControl(this.product.minimumQuantity, [
-            Validators.min(this.product.minimumQuantity),
-            Validators.required,
-        ]);
+        this.quantityForm = new FormControl(1);
     }
 
     get title(): string {

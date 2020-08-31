@@ -9,6 +9,7 @@
         "lint": "ng lint",
         "e2e": "ng e2e",
         "test-ci": "ng test --watch=false --browsers=ChromeHeadless",
+        "coverage": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
         "deploy-ghp": "ng build --prod --output-path=docs"
     },
     "private": true,
