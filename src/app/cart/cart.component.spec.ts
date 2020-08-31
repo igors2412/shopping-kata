@@ -237,7 +237,7 @@ describe('a cart component', () => {
         expect(component.items).toEqual([item]);
     });
 
-    it('should notifiy other subscribers when a cart item is removed', () => {
+    it('should notify other subscribers when a cart item is removed', () => {
         const cartService = TestBed.inject(CartService);
         component.ngOnInit();
         expect(component.items).toEqual([]);
@@ -254,7 +254,7 @@ describe('a cart component', () => {
         expect(cartService.removeItem).toHaveBeenCalledWith(item);
     });
 
-    it('should notifiy other subscribers when the quantity of a product was updated', () => {
+    it('should notify other subscribers when the quantity of a product was updated', () => {
         const cartService = TestBed.inject(CartService);
         component.ngOnInit();
         expect(component.items).toEqual([]);

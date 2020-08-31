@@ -26,6 +26,14 @@ export class AddToCartComponent implements OnInit {
         return `${this.product.data.name} zum Warenkorb hinzufügen?`;
     }
 
+    get salePrice(): number {
+        return Math.round(this.product.data.saleCost * this.product.data.saleQuantity);
+    }
+
+    get superSalePrice(): number {
+        return Math.round(this.product.data.superSaleCost * this.product.data.superSaleQuantity);
+    }
+
     addToCart(): void {
         const item: ICartItem = {
             product: this.product,

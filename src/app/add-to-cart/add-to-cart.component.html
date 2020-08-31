@@ -1,11 +1,9 @@
 <h3>{{ title }}</h3>
 
 <article class="sale" *ngIf="product.hasSale || product.hasSuperSale">Sparangebot:</article>
-<article *ngIf="product.hasSale" class="small">
-    {{ product.data.saleQuantity }} für {{ product.data.saleCost * product.data.saleQuantity }} €.
-</article>
-<article *ngIf="product.hasSuperSale" class="small">
-    {{ product.data.superSaleQuantity }} für {{ product.data.superSaleCost * product.data.superSaleQuantity }} €.
+<article *ngIf="product.hasSale" class="small sale">{{ product.data.saleQuantity }} für {{ salePrice }} €.</article>
+<article *ngIf="product.hasSuperSale" class="small supersale">
+    {{ product.data.superSaleQuantity }} für {{ superSalePrice }} €.
 </article>
 
 <div class="quantity">

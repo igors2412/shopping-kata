@@ -49,4 +49,26 @@ describe('an add to cart component', () => {
         const inputElem = fixture.debugElement.queryAll(By.css('mat-option'));
         expect(inputElem.length).toBe(20);
     });
+
+    it('should display the sale offer', () => {
+        component.product = testProduct;
+        fixture.detectChanges();
+
+        const tag = fixture.debugElement.query(By.css('.small.sale'));
+        expect(tag).not.toBeNull();
+
+        const elem = tag.nativeElement as HTMLElement;
+        expect(elem.innerHTML.includes('2 für 90 €.')).toBeTrue();
+    });
+
+    it('should display the super sale offer', () => {
+        component.product = testProduct;
+        fixture.detectChanges();
+
+        const tag = fixture.debugElement.query(By.css('.small.supersale'));
+        expect(tag).not.toBeNull();
+
+        const elem = tag.nativeElement as HTMLElement;
+        expect(elem.innerHTML.includes('3 für 130 €.')).toBeTrue();
+    });
 });
