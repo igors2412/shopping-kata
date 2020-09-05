@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTooltipDefaultOptions, MatTooltipModule, MAT_TOOLTIP_DEFAULT_OPTIONS } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
@@ -19,6 +19,8 @@ import { EmptyLogoComponent } from './empty-logo/empty-logo.component';
 import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
 import { CartService, ProductService } from './services';
+
+const toolTipOptions: Partial<MatTooltipDefaultOptions> = { touchGestures: 'on' };
 
 @NgModule({
     declarations: [
@@ -45,7 +47,7 @@ import { CartService, ProductService } from './services';
         MatTooltipModule,
         MatSelectModule,
     ],
-    providers: [CartService, ProductService],
+    providers: [CartService, ProductService, { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: toolTipOptions }],
     bootstrap: [AppComponent],
     entryComponents: [AddToCartComponent],
 })
