@@ -35,21 +35,6 @@ describe('a product component', () => {
     it('should show an icon if a sale exists', () => {
         const productA = testProducts[0];
         const aCopy = { ...productA };
-        delete aCopy.superSaleCost;
-        delete aCopy.superSaleQuantity;
-
-        component.product = new ProductViewModel(aCopy);
-        fixture.detectChanges();
-
-        const result = fixture.debugElement.query(By.css('.sale'));
-        expect(result).not.toBeNull();
-    });
-
-    it('should show an icon if a super sale exists', () => {
-        const productA = testProducts[0];
-        const aCopy = { ...productA };
-        delete aCopy.saleCost;
-        delete aCopy.saleQuantity;
 
         component.product = new ProductViewModel(aCopy);
         fixture.detectChanges();
@@ -61,10 +46,7 @@ describe('a product component', () => {
     it('should hide the sale icon if there is no sale offer', () => {
         const productA = testProducts[0];
         const aCopy = { ...productA };
-        delete aCopy.saleCost;
-        delete aCopy.saleQuantity;
-        delete aCopy.superSaleCost;
-        delete aCopy.superSaleQuantity;
+        delete aCopy.saleOptions;
 
         component.product = new ProductViewModel(aCopy);
         fixture.detectChanges();

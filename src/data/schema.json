@@ -27,24 +27,25 @@
                 "icon": {
                     "type": "string"
                 },
-                "saleCost": {
-                    "type": "number",
-                    "minimum": 0
-                },
-                "saleQuantity": {
-                    "type": "number",
-                    "minimum": 0
-                },
-                "superSaleCost": {
-                    "type": "number",
-                    "minimum": 0
-                },
-                "superSaleQuantity": {
-                    "type": "number",
-                    "minimum": 0
+                "saleOptions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#definitions/saleOption"
+                    }
                 }
             },
             "required": ["id", "name", "icon", "cost"]
+        },
+        "saleOption": {
+            "type": "object",
+            "properties": {
+                "quantity": {
+                    "type": "number"
+                },
+                "cost": {
+                    "type": "number"
+                }
+            }
         }
     }
 }

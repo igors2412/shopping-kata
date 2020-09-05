@@ -50,25 +50,17 @@ describe('an add to cart component', () => {
         expect(inputElem.length).toBe(20);
     });
 
-    it('should display the sale offer', () => {
+    it('should display sale offers', () => {
         component.product = testProduct;
         fixture.detectChanges();
 
-        const tag = fixture.debugElement.query(By.css('.small.sale'));
-        expect(tag).not.toBeNull();
+        const tags = fixture.debugElement.queryAll(By.css('.small'));
+        expect(tags.length).toBe(2);
 
-        const elem = tag.nativeElement as HTMLElement;
-        expect(elem.innerHTML.includes('2 für 90 €.')).toBeTrue();
-    });
+        const sale1 = tags[1].nativeElement as HTMLElement;
+        expect(sale1.innerHTML.includes('2 für 90 €.')).toBeTrue();
 
-    it('should display the super sale offer', () => {
-        component.product = testProduct;
-        fixture.detectChanges();
-
-        const tag = fixture.debugElement.query(By.css('.small.supersale'));
-        expect(tag).not.toBeNull();
-
-        const elem = tag.nativeElement as HTMLElement;
-        expect(elem.innerHTML.includes('3 für 130 €.')).toBeTrue();
+        const sale2 = tags[0].nativeElement as HTMLElement;
+        expect(sale2.innerHTML.includes('3 für 130 €.')).toBeTrue();
     });
 });

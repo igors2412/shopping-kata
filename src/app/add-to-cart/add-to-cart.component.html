@@ -1,10 +1,11 @@
 <h3>{{ title }}</h3>
 
-<article class="sale" *ngIf="product.hasSale || product.hasSuperSale">Sparangebot:</article>
-<article *ngIf="product.hasSale" class="small sale">{{ product.data.saleQuantity }} für {{ salePrice }} €.</article>
-<article *ngIf="product.hasSuperSale" class="small supersale">
-    {{ product.data.superSaleQuantity }} für {{ superSalePrice }} €.
-</article>
+<div class="sale" *ngIf="product.hasSale">
+    <article>Sparangebot:</article>
+    <article class="small" *ngFor="let option of product.prioritizedSaleOptions">
+        {{ option.quantity }} für {{ getSalePrice(option) }} €.
+    </article>
+</div>
 
 <div class="quantity">
     <span>Menge:</span>
@@ -13,6 +14,7 @@
             <mat-option *ngFor="let q of product.quantitiySelection" [value]="q">{{ q }}</mat-option>
         </mat-select>
     </mat-form-field>
+    <span>Preis (pro Stück): {{ product.data.cost }} €</span>
 </div>
 
 <div class="actions">

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ICartItem, ProductViewModel } from 'src/models';
+import { ICartItem, IProductSaleOption, ProductViewModel } from 'src/models';
 import { CartService } from '../services';
 
 @Component({
@@ -26,14 +26,6 @@ export class AddToCartComponent implements OnInit {
         return `${this.product.data.name} zum Warenkorb hinzufügen?`;
     }
 
-    get salePrice(): number {
-        return Math.round(this.product.data.saleCost * this.product.data.saleQuantity);
-    }
-
-    get superSalePrice(): number {
-        return Math.round(this.product.data.superSaleCost * this.product.data.superSaleQuantity);
-    }
-
     addToCart(): void {
         const item: ICartItem = {
             product: this.product,
@@ -42,5 +34,9 @@ export class AddToCartComponent implements OnInit {
 
         this.cartService.addItem(item);
         this.dialogRef.close();
+    }
+
+    getSalePrice(option: IProductSaleOption): number {
+        return Math.round(option.cost * option.quantity);
     }
 }

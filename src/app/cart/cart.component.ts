@@ -18,7 +18,7 @@ export class CartComponent implements OnInit, OnDestroy {
     }
 
     get totalPrice(): number {
-        return this.items.reduce((a, b) => a + b.product.calculatePriceByQuantity(b.quantity), 0);
+        return this.items.reduce((acc, i) => acc + i.product.calculatePriceByQuantity(i.quantity), 0);
     }
 
     constructor(private readonly cartService: CartService) {}

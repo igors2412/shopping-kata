@@ -7,45 +7,52 @@ export interface IProduct {
     icon: string;
 
     cost: number;
+    saleOptions?: IProductSaleOption[];
+}
 
-    saleCost?: number;
-    saleQuantity?: number;
-
-    superSaleCost?: number;
-    superSaleQuantity?: number;
+export interface IProductSaleOption {
+    quantity: number;
+    cost: number;
 }
 
 export class ProductViewModel {
+    readonly prioritizedSaleOptions: IProductSaleOption[] | undefined;
     readonly quantitiySelection = Array.from(Array(20), (_, i) => i + 1);
 
-    constructor(public readonly data: IProduct) {}
+    constructor(public readonly data: IProduct) {
+        if (!this.hasSale) {
+            return;
+        }
 
-    get hasSale(): boolean {
-        return this.data.saleCost !== undefined && this.data.saleQuantity !== undefined;
+        const comparer = (a: IProductSaleOption, b: IProductSaleOption) =>
+            a.quantity === b.quantity ? 0 : a.quantity > b.quantity ? -1 : 1;
+        this.prioritizedSaleOptions = this.data.saleOptions.sort(comparer);
     }
 
-    get hasSuperSale(): boolean {
-        return this.data.superSaleCost !== undefined && this.data.superSaleQuantity !== undefined;
+    get hasSale(): boolean {
+        return this.data.saleOptions !== undefined;
     }
 
     calculatePriceByQuantity(quantity: number): number {
+        if (this.data.cost === undefined) {
+            throw new Error(`Data model error. Cannot calculate price without cost.`);
+        }
+
         if (quantity === 0) {
             return 0;
         }
 
-        if (this.hasSuperSale && quantity >= this.data.superSaleQuantity) {
-            return this.calculatePriceFragmentByQuantity(
-                quantity,
-                this.data.superSaleCost,
-                this.data.superSaleQuantity
-            );
-        } else if (this.hasSale && quantity >= this.data.saleQuantity) {
-            return this.calculatePriceFragmentByQuantity(quantity, this.data.saleCost, this.data.saleQuantity);
-        } else if (this.data.cost === undefined) {
-            throw new Error(`Data model error. Cannot calculate price.`);
-        } else {
-            return quantity * this.data.cost;
+        if (!this.hasSale) {
+            return Math.round(quantity * this.data.cost);
         }
+
+        const highestSaleQuantityOption = this.prioritizedSaleOptions.find((o) => o.quantity <= quantity);
+        const sale: IProductSaleOption = {
+            cost: highestSaleQuantityOption ? highestSaleQuantityOption.cost : this.data.cost,
+            quantity: highestSaleQuantityOption ? highestSaleQuantityOption.quantity : 1,
+        };
+
+        return this.calculatePriceFragmentByQuantity(quantity, sale.cost, sale.quantity);
     }
 
     private calculatePriceFragmentByQuantity(quantity: number, saleCost: number, saleQuantity: number): number {

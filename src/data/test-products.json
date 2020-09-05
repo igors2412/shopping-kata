@@ -6,18 +6,28 @@
             "cost": 50,
             "name": "Puzzle",
             "icon": "extension",
-            "saleQuantity": 2,
-            "saleCost": 45,
-            "superSaleQuantity": 3,
-            "superSaleCost": 43.33
+            "saleOptions": [
+                {
+                    "cost": 45,
+                    "quantity": 2
+                },
+                {
+                    "cost": 43.33,
+                    "quantity": 3
+                }
+            ]
         },
         {
             "id": "B",
             "cost": 30,
             "name": "Wecker",
             "icon": "alarm",
-            "saleQuantity": 2,
-            "saleCost": 22.5
+            "saleOptions": [
+                {
+                    "cost": 22.5,
+                    "quantity": 2
+                }
+            ]
         },
         {
             "id": "C",
@@ -36,18 +46,52 @@
             "name": "Tee",
             "icon": "eco",
             "cost": 10,
-            "saleQuantity": 2,
-            "saleCost": 7.5
+            "saleOptions": [
+                {
+                    "cost": 7.5,
+                    "quantity": 2
+                }
+            ]
         },
         {
             "id": "F",
             "cost": 10,
             "name": "Radio",
             "icon": "radio",
-            "saleQuantity": 2,
-            "saleCost": 10,
-            "superSaleQuantity": 6,
-            "superSaleCost": 5
+            "saleOptions": [
+                {
+                    "cost": 10,
+                    "quantity": 2
+                },
+                {
+                    "cost": 5,
+                    "quantity": 6
+                }
+            ]
+        },
+        {
+            "id": "G",
+            "cost": 120,
+            "name": "Anker",
+            "icon": "anchor",
+            "saleOptions": [
+                {
+                    "cost": 100,
+                    "quantity": 2
+                },
+                {
+                    "cost": 80,
+                    "quantity": 5
+                },
+                {
+                    "cost": 75,
+                    "quantity": 6
+                },
+                {
+                    "cost": 50,
+                    "quantity": 10
+                }
+            ]
         }
     ]
 }
